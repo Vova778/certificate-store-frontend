@@ -5,7 +5,7 @@ const Login = () => {
 
     return (
         <div className="login-container">
-
+            <h2>Login</h2>
             <form id="login-form">
                 <label htmlFor="email">Email:</label>
                 <input type="text" id="email" name="email" required />

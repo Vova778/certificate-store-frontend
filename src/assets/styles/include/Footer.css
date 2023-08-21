@@ -1,0 +1,32 @@
+footer {
+    height: 10%;
+    text-align: center;
+    padding: 4px;
+    color: #adadad;
+    background-color: #cbcfec;
+    border-top: 1px solid silver;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: block;
+    margin-right: 10px;
+}
+
+.footer-links a {
+    color: #000;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #007bff;
+}

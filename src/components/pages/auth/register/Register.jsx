@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import '../../../../assets/styles/Register.css'
+import '../../../../assets/styles/auth/Register.css'
 
 const Register = () => {
     // Стан для збереження введених даних

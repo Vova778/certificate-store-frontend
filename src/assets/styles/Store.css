@@ -1,0 +1,116 @@
+.certificates-container {
+}
+
+.items-grid-view {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.card-item {
+    width: calc(20% - 20px); /* 20% ширина елемента з відступом */
+    margin-right: 20px; /* Відстань між елементами */
+    margin-bottom: 20px; /* Відстань між рядками елементів */
+    display: inline-block; /* Щоб елементи розміщувалися в одному ряду */
+    vertical-align: top; /* Зображення зверху */
+    box-sizing: border-box; /* Щоб враховувати padding і border в обчисленні ширини */
+}
+
+.card {
+    border: 1px solid #565454;
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card-main{
+    margin: 10px;
+}
+.card-description {
+    margin: 10px 0;
+}
+
+
+.card-name {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.card-name:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card-bottom {
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-price {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.card-button-add {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.card-button-add:hover {
+    background-color: #0056b3;
+}
+
+.bottom-container {
+    display: flex;
+    width: 100%;
+    position: static;
+    bottom: 80px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a {
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #333;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #1b53be;
+}
+
+.pagination .current {
+    background-color: #007bff;
+    color: white;
+}

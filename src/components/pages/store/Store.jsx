@@ -1,7 +1,7 @@
 import React from 'react';
 import CardItem from "./components/CardItem";
 import '../../../assets/styles/Store.css';
-import PaginationComponent from "./components/PaginationComponent";
+import PaginationComponent from "../../include/pagination/PaginationComponent";
 import DefaultCard from "../../../assets/img/default_card.png";
 
 

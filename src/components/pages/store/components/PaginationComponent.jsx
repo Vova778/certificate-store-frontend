@@ -2,7 +2,7 @@ import React from 'react';
 
 const PaginationComponent = () => {
 
-    return (
+    return  (
         <div className={'bottom-container'}>
             <ul className="pagination">
                 <li><a href="#">1</a></li>

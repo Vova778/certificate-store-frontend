@@ -10,6 +10,8 @@ const AppRouter = () => {
     return (
         <Routes>
             <Route path="/" element={<Store/>} exact={true}/>
+            <Route path="/home" element={<Store/>} exact={true}/>
+            <Route path="/certificates" element={<Store/>} exact={true}/>
             <Route path="/login" element={<Login/>} exact={true}/>
             <Route path="/register" element={<Register/>} exact={true}/>
             <Route path="*" element={<NotFound/>} exact={true}/>

@@ -11,7 +11,7 @@ class CertificateService {
     static async getAll(page = 1, size = 10) {
         return await axios.get(URL, {
             params: {
-                pageIndex: page,
+                page: page,
                 size: size,
             }
         });

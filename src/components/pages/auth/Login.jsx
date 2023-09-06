@@ -1,19 +1,67 @@
-import React from "react";
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import AuthService from "../service/AuthService";
 import '../../../assets/styles/auth/Login.css'
+import UserService from "../service/UserService";
+import {Cookies} from "react-cookie";
+import {post} from "axios";
 
 const Login = () => {
+
+    const ADMIN_ROLE = 'ADMIN';
+    const cookies = new Cookies();
+    const navigate = useNavigate();
+
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [isValid, setIsValid] = useState(true);
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value)
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        if (isValid) {
+            const authRequest = {
+                email: email,
+                password: password,
+            };
+            AuthService.login(authRequest)
+                .then(response => {
+                    localStorage.setItem('user-email', response.data.userEmail);
+
+                    cookies.set("token", response.data.accessToken, {
+                        path: "/",
+                        sameSite: "strict",
+                        maxAge: 604800,
+                    });
+                    localStorage.setItem('user-role', response.data.userRole);
+                    response.data.userRole === ADMIN_ROLE ? navigate('/home') : navigate('/home');
+                })
+                .catch(e => {
+                    console.log(e.response.status)
+                });
+        }
+    };
 
     return (
         <div className="login-container">
             <h2>Login</h2>
-            <form id="login-form">
+            <form id="login-form" method={'post'} onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
-                <input type="text" id="email" name="email" required />
+                <input type="text" id="email" name="email" value={email}
+                       onChange={handleEmailChange} required/>
 
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" required />
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" value={password}
+                       onChange={handlePasswordChange} required/>
 
-                        <button type="submit">Log In</button>
+                <button type="submit">Log In</button>
             </form>
         </div>
     );

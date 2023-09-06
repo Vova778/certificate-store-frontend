@@ -9,21 +9,21 @@ const cookies = new Cookies();
 
 class UserService {
     static async getAllUsers(page = 1, size = 10) {
-        return await axios.get(API_URL,
+        return await axios.get(`API_URL/find-all`,
             {
-                params: {
-                    pageIndex: page,
-                    size: size,
-                },
                 headers: {
                     'Authorization': cookies.get("token"),
+                },
+                params: {
+                    page: page,
+                    size: size,
                 }
             }
         );
     };
 
     static async getUserById(id) {
-        return await axios.get(`${API_URL}/${id}`,
+        return await axios.get(`${API_URL}/find-by-id/${id}`,
             {
                 headers: {
                     'Authorization': cookies.get("token"),
@@ -33,17 +33,21 @@ class UserService {
     };
 
     static async getUserByEmail(email) {
-        return await axios.get(`${API_URL}/email/${email}`,
+        return await axios.get(`${API_URL}/find-by-email`,
             {
                 headers: {
-                    'Authorization': cookies.get("token"),
+                    'Authorization': "Bearer " + cookies.get("token"),
+                    'jwt' : cookies.get("token")
+                },
+                params: {
+                    email: email
                 }
             }
         );
     };
 
     static async getUserOrders(id) {
-        return await axios.get(`${API_URL}/${id}/orders`,
+        return await axios.get(`${API_URL}/${id}/receipts`,
             {
                 headers: {
                     'Authorization': cookies.get("token"),

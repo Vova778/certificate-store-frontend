@@ -5,11 +5,11 @@ const URL = `${ApiConfig}/auth`;
 
 class AuthService {
     static async login(request) {
-        return await axios.post(`${URL}/login`, request);
+        return await axios.post(`${URL}/sign-in`, request);
     };
 
     static async register(request) {
-        return await axios.post(`${URL}/register`, request);
+        return await axios.post(`${URL}/sign-up`, request);
     };
 
 }

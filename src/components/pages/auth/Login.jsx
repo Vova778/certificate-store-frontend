@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import AuthService from "../service/AuthService";
 import '../../../assets/styles/auth/Login.css'
-import UserService from "../service/UserService";
 import {Cookies} from "react-cookie";
 import {post} from "axios";
 
@@ -33,15 +32,15 @@ const Login = () => {
             };
             AuthService.login(authRequest)
                 .then(response => {
-                    localStorage.setItem('user-email', response.data.userEmail);
+                    sessionStorage.setItem('user-email', response.data.email);
 
-                    cookies.set("token", response.data.accessToken, {
+                    cookies.set("user-token", response.data.token, {
                         path: "/",
                         sameSite: "strict",
                         maxAge: 604800,
                     });
-                    localStorage.setItem('user-role', response.data.userRole);
-                    response.data.userRole === ADMIN_ROLE ? navigate('/home') : navigate('/home');
+                    sessionStorage.setItem('user-role', response.data.role);
+                    response.data.role === ADMIN_ROLE ? navigate('/home') : navigate('/home');
                 })
                 .catch(e => {
                     console.log(e.response.status)

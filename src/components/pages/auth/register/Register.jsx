@@ -1,8 +1,12 @@
 import React, {useState} from "react";
 import '../../../../assets/styles/auth/Register.css'
+import AuthService from "../../service/AuthService";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
-    // Стан для збереження введених даних
+    const navigate = useNavigate();
+    const [isValid, setIsValid] = useState(true);
+
     const [formData, setFormData] = useState({
         email: "",
         firstName: "",
@@ -11,7 +15,6 @@ const Register = () => {
         repeatPassword: ""
     });
 
-    // Обробник подій для зміни полів вводу
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({
@@ -20,9 +23,21 @@ const Register = () => {
         });
     };
 
-    // Обробник події для відправки форми
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (isValid) {
+            const authRequest = {
+                email: formData.email,
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                password: formData.password,
+            };
+            AuthService.register(authRequest)
+                .then(() => navigate('/login'))
+                .catch(e => {
+                    console.log(e.response.status);
+                });
+        }
     };
 
     return (

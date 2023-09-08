@@ -1,16 +1,11 @@
 import React from 'react';
-import UsersTable from "./tables/UsersTable";
 import CertificatesTable from "./tables/CertificatesTable";
 
-const DataTableContainer = ({contentType}) => {
-    const certificates = 'certificates';
+const DataTableContainer = () => {
 
     return (
         <div>
-            {contentType === certificates
-                ? <CertificatesTable/>
-                : <UsersTable/>}
-
+            <CertificatesTable/>
         </div>
     );
 };

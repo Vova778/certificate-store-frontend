@@ -11,16 +11,18 @@ const NavLinks = () => {
     const [role, setRole] = useState('');
 
     useEffect(() => {
-        const localStorageEmail = localStorage.getItem("user-email");
-        UserService.getUserByEmail(localStorageEmail)
+        if(sessionStorage.getItem("user-email")){
+        const sessionStorageEmail = sessionStorage.getItem("user-email");
+        UserService.getUserByEmail(sessionStorageEmail)
             .then(response => {
-                setRole(response.data.userRole);
+                setRole(response.data.role);
             });
+        }
     }, []);
 
     return (
         <div className={'nav-links'}>
-            {localStorage.getItem("user-email") ? (role === ADMIN_ROLE ? <AdminNavLinks/> : <UserNavLinks/>)
+            {sessionStorage.getItem("user-email") !== null ? (role === ADMIN_ROLE ? <AdminNavLinks/> : <UserNavLinks/>)
                 : <UnAuthNavLinks/>}
         </div>
     );

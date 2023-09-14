@@ -32,14 +32,14 @@ const Login = () => {
             };
             AuthService.login(authRequest)
                 .then(response => {
-                    sessionStorage.setItem('user-email', response.data.email);
+                    localStorage.setItem('user-email', response.data.email);
 
                     cookies.set("user-token", response.data.token, {
                         path: "/",
                         sameSite: "strict",
                         maxAge: 604800,
                     });
-                    sessionStorage.setItem('user-role', response.data.role);
+                    localStorage.setItem('user-role', response.data.role);
                     response.data.role === ADMIN_ROLE ? navigate('/home') : navigate('/home');
                 })
                 .catch(e => {

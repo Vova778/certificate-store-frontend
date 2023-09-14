@@ -2,11 +2,11 @@ import React from 'react';
 import '../../../assets/styles/Admin.css';
 import DataTableContainer from "./components/DataTableContainer";
 
-const AdminUI = ({contentType}) => {
+const AdminUI = () => {
 
     return (
         <div className={'admin-table-container'}>
-            <DataTableContainer contentType={contentType}/>
+            <DataTableContainer/>
         </div>
 
     );

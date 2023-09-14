@@ -100,3 +100,19 @@ header {
     box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.3);
     transition: .5s;
 }
+
+
+
+.adminUI-name {
+    padding-left: 15px;
+    color: #2691d9;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.user-name {
+    padding-left: 15px;
+    color: #2691d9;
+    font-size: 1.5rem;
+    font-weight: bold;
+}

@@ -8,8 +8,11 @@ const URL = `${ApiConfig}/certificates`;
 const cookies = new Cookies();
 
 class CertificateService {
-    static async getAll(page = 1, size = 10) {
-        return await axios.get(URL, {
+    static async getAll(page, size) {
+        return await axios.get(URL+"/find-all", {
+            headers: {
+                Authorization: `Bearer ${cookies.get("user-token")}`,
+            },
             params: {
                 page: page,
                 size: size,
@@ -24,7 +27,7 @@ class CertificateService {
     static async save(request) {
         return await axios.post(`${URL}`,  request, {
             headers: {
-                'Authorization': cookies.get("token"),
+                Authorization: `Bearer ${cookies.get("user-token")}`,
             }
         });
     };
@@ -33,7 +36,7 @@ class CertificateService {
     static async update(request) {
         return await axios.patch(`${URL}`,  request, {
             headers: {
-                'Authorization': cookies.get("token"),
+                Authorization: `Bearer ${cookies.get("user-token")}`,
             }
         });
     };
@@ -41,7 +44,7 @@ class CertificateService {
     static async delete(id) {
         return await axios.delete(`${URL}/${id}`, {
             headers: {
-                'Authorization': cookies.get("token"),
+                Authorization: `Bearer ${cookies.get("user-token")}`,
             }
         });
     };

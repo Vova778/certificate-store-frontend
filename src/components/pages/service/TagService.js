@@ -11,7 +11,7 @@ class TagService {
     static async getAll(page = 1, size = 10) {
         return await axios.get(API_URL, {
             headers: {
-                'Authorization': cookies.get("token"),
+                'Authorization': cookies.get("user-token"),
             },
             params: {
                 page: page,
@@ -23,7 +23,7 @@ class TagService {
     static async findMostPopularTags(page = 1, size = 10) {
         return await axios.get(`${API_URL}/find-most-widely-used-tag`, {
             headers: {
-                'Authorization': cookies.get("token"),
+                'Authorization': cookies.get("user-token"),
             },
             params: {
                 page: page,

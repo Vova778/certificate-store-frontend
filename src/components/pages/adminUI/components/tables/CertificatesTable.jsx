@@ -7,13 +7,13 @@ import SearchBox from "./SearchBox";
 import {useDispatch, useSelector} from "react-redux";
 import * as adminActions from "../../../../../store/admin/AdminReducer";
 import TagList from "./components/TagList";
-
+import {setPageQty} from "../../../../../store/pagination/PaginationReducer";
 
 
 const CertificatesTable = () => {
 
-    const tags_max_count = 2;
-    const description_max_length = 5;
+    const tags_max_count = 3;
+    const description_max_length = 64;
 
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
@@ -25,10 +25,10 @@ const CertificatesTable = () => {
         CertificateService.getAll(page, size)
             .then(response => {
                 dispatch(adminActions.setCertificates(response.data._embedded.giftCertificateModelList));
+                dispatch(setPageQty(response.data.page.totalPages, size));
             })
             .catch(e => console.log(e));
     }, [dispatch, page, size]);
-
 
 
     return (

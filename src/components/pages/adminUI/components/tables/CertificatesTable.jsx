@@ -6,10 +6,14 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchBox from "./SearchBox";
 import {useDispatch, useSelector} from "react-redux";
 import * as adminActions from "../../../../../store/admin/AdminReducer";
+import TagList from "./components/TagList";
 
 
 
 const CertificatesTable = () => {
+
+    const tags_max_count = 2;
+    const description_max_length = 5;
 
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
@@ -30,11 +34,11 @@ const CertificatesTable = () => {
     return (
         <div>
             <div className={'table-container-header'}>
-                <button
-                    className={'add-certificate-button'}>
-                    <AddIcon/> Certificate
-                </button>
                 <SearchBox/>
+                <button
+                className={'add-certificate-button'}>
+                <AddIcon/> Certificate
+            </button>
             </div>
             <table className="table">
                 <thead>
@@ -51,8 +55,23 @@ const CertificatesTable = () => {
                 {certificates.map(certificate =>
                     <tr key={certificate.id}>
                         <td>{certificate.name}</td>
-                        <td key={certificate.id}>{certificate.tags.map(tag => tag.name).join()}</td>
-                        <td>{certificate.description}</td>
+
+                        <td>
+                            <TagList tags={
+                                certificate.tags.length > tags_max_count
+                                    ? [
+                                        ...certificate.tags.slice(0, tags_max_count),
+                                        { id: -1, name: "..." },
+                                    ]
+                                    : certificate.tags
+                            } />
+                        </td>
+
+                        <td>
+                            {certificate.description.length > description_max_length
+                                ? certificate.description.slice(0, description_max_length) + "..."
+                                : certificate.description}
+                        </td>
                         <td>${certificate.price}</td>
                         <td>{new Date(certificate.lastUpdateDate).toLocaleDateString()}</td>
                         <td>

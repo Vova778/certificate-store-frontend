@@ -12,6 +12,9 @@ class AuthService {
         return await axios.post(`${URL}/sign-up`, request);
     };
 
+    static async logout(request){
+        return await axios.post(`${URL}/logout`, request)
+    }
 }
 
 export default AuthService;

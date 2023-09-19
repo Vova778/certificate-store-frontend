@@ -37,7 +37,7 @@ const CertificatesTable = () => {
                 <SearchBox/>
                 <button
                 className={'add-certificate-button'}>
-                <AddIcon/> Certificate
+                <AddIcon/> Add new
             </button>
             </div>
             <table className="table">

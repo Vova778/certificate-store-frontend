@@ -6,17 +6,14 @@
     justify-content: center;
     background: white;
 }
-
 .table-container-header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between; /* Замість space-around для розміщення SearchBox посередині і кнопки в правому куті */
+    align-items: center; /* Додано для центрування вертикально */
 }
 
 .add-certificate-button {
-    display: flex;
-    justify-content: right;
-    align-content: center;
-    margin: 5px 0;
+    margin: 5px 15px 5px 5px;
     border: 1px solid #2691d9;
     background: #2691d9;
     border-radius: 10px;
@@ -25,6 +22,21 @@
     cursor: pointer;
     outline: none;
     padding: 10px;
+    display: flex;
+    align-items: center; /* Вирівнювання по вертикалі */
+    gap: 5px; /* Відступ між іконкою і текстом */
+}
+
+@media screen and (max-width: 600px) {
+    .table-container-header {
+        flex-direction: column; /* Розташувати елементи вертикально */
+        text-align: center; /* Вирівнювання тексту по центру */
+    }
+
+    .add-certificate-button {
+        margin-top: 10px; /* Відступ від верхньої сторони SearchBox */
+        align-self: center; /* Вирівнювання кнопки по центру */
+    }
 }
 
 .add-certificate-button:hover {

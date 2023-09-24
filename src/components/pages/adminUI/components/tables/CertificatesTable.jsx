@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CertificateService from "../../../service/CertificateService";
 import ActionButton from "./ActionButton";
 import PaginationComponent from "../../../../include/pagination/PaginationComponent";
@@ -8,17 +8,28 @@ import {useDispatch, useSelector} from "react-redux";
 import * as adminActions from "../../../../../store/admin/AdminReducer";
 import TagList from "./components/TagList";
 import {setPageQty} from "../../../../../store/pagination/PaginationReducer";
+import {Modal} from "@mui/material";
+import { useSearchParams } from 'react-router-dom';
+
 
 
 const CertificatesTable = () => {
 
     const tags_max_count = 3;
     const description_max_length = 64;
+    const [isViewModalVisible, setViewModalVisible] = useState(false);
+    const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+
 
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
-    const page = useSelector(state => state.paginationData.page) -1;
-    const size = useSelector(state => state.paginationData.size);
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const page = searchParams.get('page') || 0;
+    const size = searchParams.get('size') || 10;
+
+
 
 
     useEffect(() => {
@@ -30,9 +41,15 @@ const CertificatesTable = () => {
             .catch(e => console.log(e));
     }, [dispatch, page, size]);
 
+    const showViewModal = () => setViewModalVisible(true);
+
+    const showDeleteModal = () => setDeleteModalVisible(true);
+
 
     return (
         <div>
+
+
             <div className={'table-container-header'}>
                 <SearchBox/>
                 <button

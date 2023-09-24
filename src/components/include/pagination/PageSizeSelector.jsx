@@ -2,12 +2,17 @@ import React from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import {InputLabel, Select} from "@mui/material";
-import {useDispatch, useSelector} from "react-redux";
-import {setSize} from "../../../store/pagination/PaginationReducer";
+import {useSearchParams} from "react-router-dom";
 
 const PageSizeSelector = () => {
-    const size = useSelector(state => state.paginationData.size);
-    const dispatch = useDispatch();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const size = searchParams.get('size') || 10;
+    const page = searchParams.get('page') || 0;
+
+    const handleSizeChange = (event) => {
+
+        setSearchParams({page: page, size: event.target.value});
+    };
 
     return (
         <FormControl className={'size-selector'} sx={{m: 1}} size="small">
@@ -17,8 +22,8 @@ const PageSizeSelector = () => {
                 id="demo-select-small"
                 value={size}
                 label={'Size'}
-                onChange={(event) => dispatch(setSize(event.target.value))}
-            >
+                onChange={handleSizeChange}>
+
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={20}>20</MenuItem>
                 <MenuItem value={50}>50</MenuItem>

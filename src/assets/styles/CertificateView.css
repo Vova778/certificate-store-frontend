@@ -1,0 +1,75 @@
+.modal-view-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    width: 65%;
+    border-radius: 20px;
+    box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.3);
+    padding: 20px; /* Замість .modal-view-card */
+}
+
+.dialog-title {
+    text-align: center;
+    padding: 0 0 20px 0;
+    border-bottom: 1px solid silver;
+    color: #2691d9;
+}
+
+.modal-view-header {
+    text-align: center;
+    color: #2691d9;
+    font-size: 1.5rem; /* Замість .modal-view-column .card-item-name */
+    margin-bottom: 20px; /* Замість .modal-view-header */
+}
+
+.modal-view-card-image {
+    width: 100%;
+    max-height: 300px; /* Встановіть максимальну висоту для зображення */
+    border-radius: 20px;
+}
+
+.modal-view-column {
+    text-align: center;
+}
+
+.modal-view-column .card-item-price {
+    color: black;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 10px;
+}
+
+.modal-view-column .update-date {
+    color: #9b9999;
+    font-size: 1rem;
+    margin-top: 10px; /* Відступ від дати оновлення */
+}
+
+.modal-view-column .card-item-description {
+    overflow-y: auto; /* Додавання прокрутки в разі необхідності */
+    max-height: 100px; /* Максимальна висота опису */
+    font-size: 1rem;
+    padding: 0 15px;
+    margin-top: 10px; /* Відступ від опису */
+}
+
+.modal-view-column .card-button {
+    border: 1px solid #2691d9;
+    border-radius: 20px;
+    padding: 12px;
+    color: #2691d9;
+    background-color: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1rem;
+    width: 25%;
+    margin: 0 2%;
+}
+
+.modal-view-column .card-button:hover {
+    opacity: 0.8;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: .5s;
+}

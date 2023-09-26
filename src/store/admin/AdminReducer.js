@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     certificates: [],
+    selectedCertificate: '',
 };
 
 const adminSlice = createSlice({
@@ -10,11 +11,15 @@ const adminSlice = createSlice({
     reducers: {
         setCertificates(state, action) {
             state.certificates = action.payload;
+        },
+        setSelectedCertificate(state, action) {
+            state.selectedCertificate = action.payload;
         }
     },
 });
 
 export const {
-    setCertificates
+    setCertificates,
+    setSelectedCertificate
 } = adminSlice.actions;
 export default adminSlice.reducer;

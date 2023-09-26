@@ -10,6 +10,7 @@ import TagList from "./components/TagList";
 import {setPageQty} from "../../../../../store/pagination/PaginationReducer";
 import {useSearchParams} from 'react-router-dom';
 import CertificateView from "./components/modal/CertificateView";
+import CertificateDelete from "./components/modal/CertificateDelete";
 
 
 const CertificatesTable = () => {
@@ -25,7 +26,7 @@ const CertificatesTable = () => {
     const selectedCertificate = useSelector(state => state.adminData.selectedCertificate);
 
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
 
     const page = searchParams.get('page') || 0;
     const size = searchParams.get('size') || 10;
@@ -55,7 +56,11 @@ const CertificatesTable = () => {
                 handleClose={closeViewModal}
                 certificate={selectedCertificate}
             />
-
+            <CertificateDelete
+                open={isDeleteModalVisible}
+                handleClose={closeDeleteModal}
+                certificate={selectedCertificate}
+            />
 
             <div className={'table-container-header'}>
                 <SearchBox/>
@@ -105,7 +110,10 @@ const CertificatesTable = () => {
                                     openViewModal();
                                 }}/>
                                 <ActionButton buttonsClassName={'edit-btn'} name={'Edit'}/>
-                                <ActionButton buttonsClassName={'delete-btn'} name={'Delete'}/>
+                                <ActionButton buttonsClassName={'delete-btn'} name={'Delete'} handler={() => {
+                                    dispatch(adminActions.setSelectedCertificate(certificate));
+                                    openDeleteModal();
+                                }}/>
                             </div>
                         </td>
                     </tr>)}

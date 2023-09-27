@@ -2,9 +2,9 @@ import React from 'react';
 import {Dialog, DialogTitle, DialogContent, DialogActions, Button} from '@mui/material';
 import '../../../../../../../assets/styles/CertificateView.css';
 
-const CertificateView = ({open, handleClose, certificate}) => {
+const CertificateView = ({setVisible, handleClose, certificate}) => {
     return (
-        <Dialog open={open} onClose={handleClose} maxWidth="md">
+        <Dialog open={setVisible} onClose={handleClose} maxWidth="md">
             <div className="dialog-title">
                 <DialogTitle>Certificate with id={certificate.id}</DialogTitle>
             </div>

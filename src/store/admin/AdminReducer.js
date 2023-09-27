@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     certificates: [],
+    filteredCertificates: [],
     selectedCertificate: '',
+    certificatesOpinions: ['Name', 'Description'],
+    ascSortDirection: false,
 };
 
 const adminSlice = createSlice({

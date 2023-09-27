@@ -4,7 +4,7 @@ import '../../../../../../../assets/styles/CertificateDelete.css';
 import CertificateService from "../../../../../service/CertificateService";
 import {useDispatch} from "react-redux";
 
-const CertificateDelete = ({open, handleClose, certificate}) => {
+const CertificateDelete = ({setVisible, handleClose, certificate}) => {
     useDispatch();
     const handleDelete = async () => {
         try {
@@ -16,7 +16,7 @@ const CertificateDelete = ({open, handleClose, certificate}) => {
     };
 
     return (
-        <Dialog open={open} onClose={handleClose}>
+        <Dialog open={setVisible} onClose={handleClose}>
             <DialogTitle className="certificate-delete-header">Delete Confirmation</DialogTitle>
             <DialogContent>
                 <div className="certificate-delete-card">

@@ -8,8 +8,8 @@
 }
 .table-container-header {
     display: flex;
-    justify-content: space-between; /* Замість space-around для розміщення SearchBox посередині і кнопки в правому куті */
-    align-items: center; /* Додано для центрування вертикально */
+    justify-content: space-between;
+    align-items: center;
 }
 
 .add-certificate-button {

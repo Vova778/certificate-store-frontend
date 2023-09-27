@@ -1,0 +1,163 @@
+.modal-form-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+.certificate-header {
+    color: #007bff;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+}
+
+.input-field {
+    margin-bottom: 16px;
+}
+
+.text-field {
+    width: 100%;
+}
+
+.number {
+    margin-bottom: 16px;
+
+}
+
+.tags-container {
+    padding: 0 16px 32px 20px;
+    margin-top: 12px;
+}
+
+.tag-label {
+    display: flex;
+    justify-content: center;
+    color: #2691d9;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.ReactTags__tagInput {
+    color: #9b9999;
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 16px 0;
+    width: 100%;
+}
+
+.ReactTags__tagInput input.ReactTags__tagInputField::placeholder {
+    left: 5px;
+    color: #adadad;
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.ReactTags__tagInput input.ReactTags__tagInputField {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 1rem;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.ReactTags__tagInput label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.ReactTags__editInput {
+    color: #fa8072;
+    border-radius: 1px;
+}
+
+.ReactTags__editTagInput {
+    display: inline-flex;
+}
+
+.ReactTags__selected span.ReactTags__tag {
+    border: 1px solid #2691d9;
+    border-radius: 10px;
+    background: #2691d9;
+    color: white;
+    font-size: 1rem;
+    display: inline-block;
+    padding: 5px;
+    margin: 2px 5px;
+    box-shadow: 5px 4px 8px 0 rgba(0, 0, 0, 0.3);
+}
+
+.ReactTags__selected a.ReactTags__remove {
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.ReactTags__suggestions {
+    position: absolute;
+}
+
+.ReactTags__suggestions ul {
+    list-style-type: none;
+    box-shadow: 0.05em 0.01em 0.5em rgba(0, 0, 0, 0.2);
+    background: white;
+    width: 200px;
+}
+
+.ReactTags__suggestions li {
+    border-bottom: 1px solid #ddd;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.ReactTags__suggestions li mark {
+    text-decoration: underline;
+    background: none;
+    font-weight: 600;
+}
+
+.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
+    background: #b7cfe0;
+    cursor: pointer;
+}
+
+.ReactTags__remove {
+    margin-left: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    cursor: pointer;
+    background: none;
+    color: white;
+}
+
+.buttons-column {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #d32f2f;
+}
+
+.save-button {
+    background-color: #4caf50;
+    color: white;
+}
+
+.save-button:hover {
+    background-color: #388e3c;
+}

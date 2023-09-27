@@ -25,7 +25,7 @@ class CertificateService {
     }
 
     static async save(request) {
-        return await axios.post(`${URL}`,  request, {
+        return await axios.post(`${URL}/create`,  request, {
             headers: {
                 Authorization: `Bearer ${cookies.get("user-token")}`,
             }
@@ -34,7 +34,7 @@ class CertificateService {
 
 
     static async update(request) {
-        return await axios.patch(`${URL}`,  request, {
+        return await axios.patch(`${URL}/update`,  request, {
             headers: {
                 Authorization: `Bearer ${cookies.get("user-token")}`,
             }
@@ -42,7 +42,7 @@ class CertificateService {
     };
 
     static async delete(id) {
-        return await axios.delete(`${URL}/${id}`, {
+        return await axios.delete(`${URL}/delete/${id}`, {
             headers: {
                 Authorization: `Bearer ${cookies.get("user-token")}`,
             }

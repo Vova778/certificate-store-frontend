@@ -4,8 +4,11 @@ const initialState = {
     certificates: [],
     filteredCertificates: [],
     selectedCertificate: '',
-    certificatesOpinions: ['Name', 'Description'],
-    ascSortDirection: false,
+    searchedCertificateName: '',
+    searchedCertificateDescription:'',
+    certificatesOpinions: ['CreatedDate','Title', 'Description'],
+    selectedOpinion: 'CreatedDate',
+    isSortingAscending: false,
 };
 
 const adminSlice = createSlice({
@@ -15,14 +18,38 @@ const adminSlice = createSlice({
         setCertificates(state, action) {
             state.certificates = action.payload;
         },
+        setSearchedCertificateName(state, action){
+            state.searchedCertificateName = action.payload;
+        },
+        setSearchedCertificateDescription(state, action){
+            state.searchedCertificateDescription = action.payload;
+        },
         setSelectedCertificate(state, action) {
             state.selectedCertificate = action.payload;
-        }
+        },
+        setFilteredCertificates(state, action) {
+            state.filteredCertificates = action.payload;
+        },
+        setCertificatesOpinions(state, action) {
+            state.certificatesOpinions = action.payload;
+        },
+        setSelectedOpinion(state, action) {
+            state.selectedOpinion = action.payload;
+        },
+        setIsSortingAscending(state, action) {
+            state.isSortingAscending = action.payload;
+        },
     },
 });
 
 export const {
     setCertificates,
-    setSelectedCertificate
+    setSelectedCertificate,
+    setFilteredCertificates,
+    setCertificatesOpinions,
+    setSelectedOpinion,
+    setIsSortingAscending,
+    setSearchedCertificateName,
+    setSearchedCertificateDescription,
 } = adminSlice.actions;
 export default adminSlice.reducer;

@@ -20,6 +20,22 @@ class CertificateService {
         });
     }
 
+    static async getAllWithParams(name, description, sortByName, sortByDate,page, size) {
+        return await axios.get(URL+"/find-all-with-params", {
+            headers: {
+                Authorization: `Bearer ${cookies.get("user-token")}`,
+            },
+            params: {
+                name: name,
+                description:description,
+                sortByName: sortByName,
+                sortByDate: sortByDate,
+                page: page,
+                size: size,
+            }
+        });
+    }
+
     static async getById(id) {
         return await axios.get(`${URL}/${id}`);
     }

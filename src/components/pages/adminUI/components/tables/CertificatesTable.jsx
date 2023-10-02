@@ -30,6 +30,7 @@ const CertificatesTable = () => {
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
     const selectedCertificate = useSelector(state => state.adminData.selectedCertificate);
+    const certificatesOpinions = useSelector(state => state.adminData.certificatesOpinions);
 
 
     const [searchParams] = useSearchParams();
@@ -82,7 +83,7 @@ const CertificatesTable = () => {
             />
 
             <div className={'table-container-header'}>
-                <SearchBox/>
+                <SearchBox  opinions={certificatesOpinions}/>
                 <button
                     className={'add-certificate-button'} onClick={openAddModal}>
                     <AddIcon/> Add new

@@ -7,11 +7,10 @@ import {useSearchParams} from "react-router-dom";
 const PageSizeSelector = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const size = searchParams.get('size') || 10;
-    const page = searchParams.get('page') || 0;
 
-    const handleSizeChange = (event) => {
-
-        setSearchParams({page: page, size: event.target.value});
+    const updateSizeInSearchParams = (event) => {
+        searchParams.set('size', event.target.value);
+        setSearchParams(searchParams);
     };
 
     return (
@@ -22,7 +21,7 @@ const PageSizeSelector = () => {
                 id="demo-select-small"
                 value={size}
                 label={'Size'}
-                onChange={handleSizeChange}>
+                onChange={updateSizeInSearchParams}>
 
                 <MenuItem value={10}>10</MenuItem>
                 <MenuItem value={20}>20</MenuItem>

@@ -24,7 +24,7 @@ const CertificateView = ({setVisible, handleClose, certificate}) => {
                 </div>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleClose} color="primary" variant="outlined" className="card-button">
+                <Button onClick={handleClose} color="primary" variant="contained" className="card-button">
                     Cancel
                 </Button>
             </DialogActions>

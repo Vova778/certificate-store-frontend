@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import CertificateService from "../../../service/CertificateService";
 import ActionButton from "./ActionButton";
 import PaginationComponent from "../../../../include/pagination/PaginationComponent";
@@ -25,28 +25,57 @@ const CertificatesTable = () => {
     const [isAddModalVisible, setAddModalVisible] = useState(false);
     const [isEditModalVisible, setEditModalVisible] = useState(false);
 
-
-
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
+    const searchedCertificateName = useSelector(state => state.adminData.searchedCertificateName);
     const selectedCertificate = useSelector(state => state.adminData.selectedCertificate);
     const certificatesOpinions = useSelector(state => state.adminData.certificatesOpinions);
 
-
-    const [searchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const searchedCertificationTitle = searchParams.get('name') || '';
+    const searchedCertificationDescription = searchParams.get('description') || '';
+    const searchedTagNames = searchParams.get('tagName') || [];
+    const sortByName = searchParams.get('sortByName') || '';
+    const sortByDate = sortByName ? searchParams.get('sortByDate') || '' : 'DESC';
 
     const page = searchParams.get('page') || 0;
     const size = searchParams.get('size') || 10;
 
+    const newSearchParams = {
+        tagName: searchedTagNames,
+        name: searchedCertificationTitle,
+        description: searchedCertificationDescription,
+        sortByName: sortByName,
+        sortByDate: sortByDate,
+        page: page,
+        size: size,
+    }
+
 
     useEffect(() => {
-        CertificateService.getAll(page, size)
+        CertificateService.getAllWithParams( newSearchParams )
             .then(response => {
                 dispatch(adminActions.setCertificates(response.data._embedded.giftCertificateModelList));
                 dispatch(setPageQty(response.data.page.totalPages, size));
             })
             .catch(e => console.log(e));
-    }, [dispatch, page, size]);
+    }, [dispatch,  page, size]);
+
+
+    const handleSortClick = (column) => {
+        if (column === 'createDate') {
+            newSearchParams.sortByName = '';
+            newSearchParams.sortByDate = newSearchParams.sortByDate === 'ASC' ? 'DESC' : 'ASC';
+        } else if (column === 'sortByName') {
+            newSearchParams.sortByName = newSearchParams.sortByName === 'ASC' ? 'DESC' : 'ASC';
+            newSearchParams.sortByDate = '';
+        }
+        updateSearchParams();
+    };
+    const updateSearchParams = () => {
+        setSearchParams(newSearchParams);
+    };
+
 
     const openViewModal = () => setViewModalVisible(true);
     const openAddModal = () => setAddModalVisible(true);
@@ -83,7 +112,7 @@ const CertificatesTable = () => {
             />
 
             <div className={'table-container-header'}>
-                <SearchBox  opinions={certificatesOpinions}/>
+                <SearchBox/>
                 <button
                     className={'add-certificate-button'} onClick={openAddModal}>
                     <AddIcon/> Add new
@@ -92,10 +121,14 @@ const CertificatesTable = () => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th>Create Date</th>
-                    <th>Title</th>
-                    <th>Tags</th>
+                    <th onClick={() => handleSortClick('createDate')}>
+                        Create Date {newSearchParams.sortByDate === 'ASC' ? <>&#9650;</> : <>&#9660;</>}
+                    </th>
+                    <th onClick={() => handleSortClick('sortByName')}>
+                        Title {newSearchParams.sortByName === 'ASC' ? <>&#9650;</> : <>&#9660;</>}
+                    </th>
                     <th>Description</th>
+                    <th>Tags</th>
                     <th>Price</th>
                     <th>Actions</th>
                 </tr>
@@ -104,8 +137,13 @@ const CertificatesTable = () => {
                 {certificates.map(certificate =>
                     <tr key={certificate.id}>
                         <td>{format(new Date(certificate.createDate), "yyyy-MM-dd HH:mm:ss")}</td>
-                        <td>{certificate.name}</td>
-
+                        <td>{certificate.name}
+                        </td>
+                        <td>
+                            {certificate.description.length > description_max_length
+                                ? certificate.description.slice(0, description_max_length) + "..."
+                                : certificate.description}
+                        </td>
                         <td>
                             <TagList tags={
                                 certificate.tags.length > tags_max_count
@@ -115,12 +153,6 @@ const CertificatesTable = () => {
                                     ]
                                     : certificate.tags
                             }/>
-                        </td>
-
-                        <td>
-                            {certificate.description.length > description_max_length
-                                ? certificate.description.slice(0, description_max_length) + "..."
-                                : certificate.description}
                         </td>
                         <td>${certificate.price}</td>
                         <td>
@@ -143,7 +175,6 @@ const CertificatesTable = () => {
                 </tbody>
             </table>
             <PaginationComponent/>
-
 
 
         </div>

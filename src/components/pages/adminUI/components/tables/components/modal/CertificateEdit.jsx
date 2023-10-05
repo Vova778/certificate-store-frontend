@@ -116,7 +116,8 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
     return (
         <Dialog  className="modal-form-container" open={setVisible} onClose={handleCloseForm}>
             <DialogTitle className="certificate-header">Edit Certificate</DialogTitle>
-            <DialogContent>
+            <hr/>
+            <DialogContent >
                 <form method="post" onSubmit={handleSubmit}>
                     <div className={'input-field'}>
                         <TextField

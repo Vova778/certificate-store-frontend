@@ -11,9 +11,13 @@ const PaginationComponent = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const page = parseInt(searchParams.get('page')) || FIRST_PAGE;
-    const size = searchParams.get('size') || 10;
     const pageQty = useSelector(state => state.paginationData.pageQty);
 
+    const handlePageChange = (_, number) => {
+        const newPage = number - 1;
+        searchParams.set('page', newPage.toString());
+        setSearchParams(searchParams);
+    };
 
     return (
         <div className={'bottom-container'}>
@@ -21,10 +25,7 @@ const PaginationComponent = () => {
                 color={"primary"}
                 page={page + 1}
                 count={pageQty}
-                onChange={(_, number) => setSearchParams({
-                    page: number - 1,
-                    size: size
-                })}
+                onChange={handlePageChange}
             />
             <PageSizeSelector/>
         </div>

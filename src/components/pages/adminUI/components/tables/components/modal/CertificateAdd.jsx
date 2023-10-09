@@ -11,6 +11,7 @@ import {WithContext as ReactTags} from 'react-tag-input'
 import '../../../../../../../assets/styles/CertificateForm.css';
 import ModalFormErrorMessage from "./error/ModalFormErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
+import {setPageRefresh} from "../../../../../../../store/admin/AdminReducer";
 
 const CertificateAdd = ({setVisible, handleClose}) => {
     const [isValid] = useState(true);
@@ -23,7 +24,8 @@ const CertificateAdd = ({setVisible, handleClose}) => {
     const [priceErrorMessage, setPriceErrorMessage] = useState('');
     const [durationErrorMessage, setDurationErrorMessage] = useState('');
     const [tagsErrorMessage, setTagsErrorMessage] = useState('');
-    useDispatch();
+    const dispatch = useDispatch();
+
     useEffect(() => {
         setTags(tags);
         mapTagInCertificate();
@@ -96,6 +98,7 @@ const CertificateAdd = ({setVisible, handleClose}) => {
                 .catch(e => {
                     console.log(e.errorText);
                 });
+            window.local.reload();
         }
     };
 

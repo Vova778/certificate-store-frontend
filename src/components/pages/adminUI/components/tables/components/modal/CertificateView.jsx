@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Dialog, DialogTitle, DialogContent, DialogActions, Button} from '@mui/material';
 import '../../../../../../../assets/styles/CertificateView.css';
+import {WithContext as ReactTags} from "react-tag-input";
 
 const CertificateView = ({setVisible, handleClose, certificate}) => {
+
+    const [tags] = useState([]);
+
     return (
         <Dialog open={setVisible} onClose={handleClose} maxWidth="md">
             <div className="dialog-title">
@@ -14,6 +18,14 @@ const CertificateView = ({setVisible, handleClose, certificate}) => {
                     <div className="modal-view-column">
                         <h1 className="card-item-name">{certificate.name}</h1>
                         <p className="card-item-description">{certificate.description}</p>
+                        <div className={'tags-container'}>
+                            <label className={'tag-label'}>Tags</label>
+                            <ReactTags
+                                tags={certificate ? certificate.tags.map(tag => ({id: tag.name, text: tag.name})): tags}
+                                inputFieldPosition="top"
+                                readOnly={true}
+                            />
+                        </div>
                         <p className="card-item-price">
                             Price: ${certificate.price}
                         </p>

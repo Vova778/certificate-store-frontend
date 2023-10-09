@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import {InputLabel, Select} from "@mui/material";
 import {useSearchParams} from "react-router-dom";
+import {setPageRefresh} from "../../../store/admin/AdminReducer";
+import {useDispatch} from "react-redux";
 
 const PageSizeSelector = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const refresh = () => window.location.reload();
+    const dispatch = useDispatch();
+
     const size = searchParams.get('size') || 10;
 
     const updateSizeInSearchParams = (event) => {
         searchParams.set('size', event.target.value);
         setSearchParams(searchParams);
+        refresh();
     };
 
     return (

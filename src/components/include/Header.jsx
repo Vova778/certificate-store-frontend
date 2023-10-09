@@ -6,6 +6,7 @@ import NavLinks from "./navbar/NavLinks";
 
 const Header = () => {
     useNavigate();
+
     return (
         <header>
             <div className={'logo'}>

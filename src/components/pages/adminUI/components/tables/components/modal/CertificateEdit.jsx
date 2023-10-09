@@ -12,6 +12,7 @@ import '../../../../../../../assets/styles/CertificateForm.css';
 import ModalFormErrorMessage from "./error/ModalFormErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
 
+
 const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
     const [isValid, setIsValid] = useState(true);
     const [showAlert, setShowAlert] = useState(false);
@@ -24,7 +25,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
     const [priceErrorMessage, setPriceErrorMessage] = useState('');
     const [durationErrorMessage, setDurationErrorMessage] = useState('');
     const [tagsErrorMessage, setTagsErrorMessage] = useState('');
-    useDispatch();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (certificateToUpdate) {
@@ -110,6 +111,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                         setShowAlert(true);
                     }
                 });
+            window.local.reload();
         }
     };
 
@@ -131,6 +133,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                     <ModalFormErrorMessage message={nameErrorMessage}/>
                     <div className={'input-field'}>
                         <TextField
+                            id={'input-field-description'}
                             type={'text'}
                             label={'Description'}
                             value={certificate.description}

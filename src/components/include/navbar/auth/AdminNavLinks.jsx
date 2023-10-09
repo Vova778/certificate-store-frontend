@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import HomeIcon from "@mui/icons-material/Home";
 
-const AdminNavLinks = () => {
+const AdminNavLinks = ({handleLogout}) => {
     return (
         <div className={'nav-links'}>
             <label className={'adminUI-name'}>AdminUI</label>
@@ -12,7 +12,7 @@ const AdminNavLinks = () => {
             <Link className={'nav-link'} to={'/home'}>
                 <div className={'material-icons'}><HomeIcon/></div>
             </Link>
-            <Link className={'nav-link'} to={'/logout'}>
+            <Link className={'nav-link'} onClick={handleLogout}>
                 <div className={'material-icons'}><LogoutIcon/></div>
             </Link>
         </div>

@@ -1,17 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../../../../assets/styles/include/SearchBox.css';
 import {useDispatch, useSelector} from "react-redux";
 import {WithContext as ReactTags} from "react-tag-input";
 import {useSearchParams} from "react-router-dom";
 import {Button} from "@mui/material";
+import {setPageRefresh} from "../../../../../store/admin/AdminReducer";
 
 const SearchBox = () => {
     const [searchParams, setSearchParams] = useSearchParams();
+    const refresh = () => window.location.reload();
+    const dispatch = useDispatch();
+
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [tags, setTags] = useState([]);
-
     const [searchedCertificateName, setSearchedCertificateName] = useState(searchParams.get('name') || '');
     const [searchedCertificateDescription, setSearchedCertificateDescription] = useState(searchParams.get('description') || '');
+
+
+    useEffect(() => {
+        if (searchParams.has('tagName')) {
+            setTags(searchParams.get('tagName').split(',').map(tagName => ({id: tagName, text: tagName})));
+        }
+    }, []);
 
     const handleNameChange = (e) => {
         setSearchedCertificateName(e.target.value);
@@ -20,7 +30,6 @@ const SearchBox = () => {
     const handleDescriptionChange = (e) => {
         setSearchedCertificateDescription(e.target.value);
     };
-    useDispatch();
     const toggleForm = () => {
         setIsFormOpen(!isFormOpen);
     };
@@ -28,9 +37,10 @@ const SearchBox = () => {
     const handleSubmit = () => {
         searchParams.set('name', searchedCertificateName)
         searchParams.set('description', searchedCertificateDescription)
-        tags.length>0 ? searchParams.set('tagName', tags[0].text) : searchParams.set('tagName', '');
+        tags.length > 0 ? searchParams.set('tagName', tags[0].text) : searchParams.set('tagName', '');
         toggleForm();
         setSearchParams(searchParams);
+        refresh();
     };
 
 
@@ -87,7 +97,6 @@ const SearchBox = () => {
                                 handleAddition={handleTagAdd}
                                 handleDrag={handleTagDrag}
                                 inputFieldPosition="top"
-                                autocomplete
                             />
                         </div>
                         <Button

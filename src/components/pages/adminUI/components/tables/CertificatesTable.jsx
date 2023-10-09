@@ -14,6 +14,7 @@ import CertificateView from "./components/modal/CertificateView";
 import CertificateDelete from "./components/modal/CertificateDelete";
 import CertificateAdd from "./components/modal/CertificateAdd";
 import CertificateEdit from "./components/modal/CertificateEdit";
+import {setPageRefresh} from "../../../../../store/admin/AdminReducer";
 
 
 const CertificatesTable = () => {
@@ -25,21 +26,23 @@ const CertificatesTable = () => {
     const [isAddModalVisible, setAddModalVisible] = useState(false);
     const [isEditModalVisible, setEditModalVisible] = useState(false);
 
+
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
-    const searchedCertificateName = useSelector(state => state.adminData.searchedCertificateName);
     const selectedCertificate = useSelector(state => state.adminData.selectedCertificate);
-    const certificatesOpinions = useSelector(state => state.adminData.certificatesOpinions);
+    const isPageRefresh = useSelector(state => state.adminData.isPageRefresh);
 
     const [searchParams, setSearchParams] = useSearchParams();
     const searchedCertificationTitle = searchParams.get('name') || '';
     const searchedCertificationDescription = searchParams.get('description') || '';
     const searchedTagNames = searchParams.get('tagName') || [];
     const sortByName = searchParams.get('sortByName') || '';
-    const sortByDate = sortByName ? searchParams.get('sortByDate') || '' : 'DESC';
+    const sortByDate = sortByName ==='' ? searchParams.get('sortByDate') || '' : 'DESC';
 
     const page = searchParams.get('page') || 0;
     const size = searchParams.get('size') || 10;
+
+    const refresh = () => window.location.reload();
 
     const newSearchParams = {
         tagName: searchedTagNames,
@@ -53,17 +56,18 @@ const CertificatesTable = () => {
 
 
     useEffect(() => {
+        dispatch(setPageRefresh(false));
         CertificateService.getAllWithParams( newSearchParams )
             .then(response => {
                 dispatch(adminActions.setCertificates(response.data._embedded.giftCertificateModelList));
-                dispatch(setPageQty(response.data.page.totalPages, size));
+                dispatch(setPageQty(response.data.page.totalPages));
             })
             .catch(e => console.log(e));
-    }, [dispatch,  page, size]);
+    }, [dispatch, isPageRefresh]);
 
 
     const handleSortClick = (column) => {
-        if (column === 'createDate') {
+        if (column === 'sortByDate') {
             newSearchParams.sortByName = '';
             newSearchParams.sortByDate = newSearchParams.sortByDate === 'ASC' ? 'DESC' : 'ASC';
         } else if (column === 'sortByName') {
@@ -74,6 +78,7 @@ const CertificatesTable = () => {
     };
     const updateSearchParams = () => {
         setSearchParams(newSearchParams);
+        refresh();
     };
 
 
@@ -121,7 +126,7 @@ const CertificatesTable = () => {
             <table className="table">
                 <thead>
                 <tr>
-                    <th onClick={() => handleSortClick('createDate')}>
+                    <th onClick={() => handleSortClick('sortByDate')}>
                         Create Date {newSearchParams.sortByDate === 'ASC' ? <>&#9650;</> : <>&#9660;</>}
                     </th>
                     <th onClick={() => handleSortClick('sortByName')}>

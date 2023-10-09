@@ -9,6 +9,7 @@ const initialState = {
     certificatesOpinions: ['CreatedDate','Title', 'Description'],
     selectedOpinion: 'CreatedDate',
     isSortingAscending: false,
+    isPageRefresh: false,
 };
 
 const adminSlice = createSlice({
@@ -39,6 +40,9 @@ const adminSlice = createSlice({
         setIsSortingAscending(state, action) {
             state.isSortingAscending = action.payload;
         },
+        setPageRefresh(state, action) {
+            state.isPageRefresh = action.payload;
+        },
     },
 });
 
@@ -51,5 +55,6 @@ export const {
     setIsSortingAscending,
     setSearchedCertificateName,
     setSearchedCertificateDescription,
+    setPageRefresh,
 } = adminSlice.actions;
 export default adminSlice.reducer;

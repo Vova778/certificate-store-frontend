@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const UserNavLinks = () => {
+const UserNavLinks = ({handleLogout}) => {
     return (
         <div className={'nav-links'}>
             <Link className={'nav-link'} to={'/home'}>
@@ -13,7 +13,7 @@ const UserNavLinks = () => {
             <Link className={'nav-link'} to={'/checkout'}>
                 <div className={'material-icons'}><ShoppingCartIcon/></div>
             </Link>
-            <Link className={'nav-link'} to={'/logout'}>
+            <Link className={'nav-link'} onClick={handleLogout}>
                 <div className={'material-icons'}><LogoutIcon/></div>
             </Link>
         </div>

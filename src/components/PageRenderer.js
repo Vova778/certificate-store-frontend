@@ -1,8 +1,8 @@
 import React from 'react';
 import {Route, Routes} from "react-router-dom";
 import Login from "./pages/auth/Login";
-import NotFound from "./pages/NotFound";
-import Register from "./pages/auth/register/Register";
+import NotFound from "./common/NotFound";
+import Register from "./pages/auth/Register";
 import Store from "./pages/store/Store";
 import AdminUI from "./pages/adminUI/AdminUI";
 

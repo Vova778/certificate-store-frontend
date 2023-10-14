@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux";
 const PageSizeSelector = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const refresh = () => window.location.reload();
-    const dispatch = useDispatch();
 
     const size = searchParams.get('size') || 10;
 

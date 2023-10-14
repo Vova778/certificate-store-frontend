@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import {WithContext as ReactTags} from 'react-tag-input'
 import '../../../../../../../assets/styles/CertificateForm.css';
-import ModalFormErrorMessage from "./error/ModalFormErrorMessage";
+import ErrorMessage from "../../../../../../common/ErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
 
 
@@ -130,7 +130,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                             required={true}
                         />
                     </div>
-                    <ModalFormErrorMessage message={nameErrorMessage}/>
+                    <ErrorMessage message={nameErrorMessage}/>
                     <div className={'input-field'}>
                         <TextField
                             id={'input-field-description'}
@@ -141,7 +141,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                             required={true}
                         />
                     </div>
-                    <ModalFormErrorMessage message={descriptionErrorMessage}/>
+                    <ErrorMessage message={descriptionErrorMessage}/>
 
                     <div className={'number'}>
                         <TextField
@@ -152,7 +152,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                             required={true}
                         />
                     </div>
-                    <ModalFormErrorMessage message={priceErrorMessage}/>
+                    <ErrorMessage message={priceErrorMessage}/>
                     <div className={'number'}>
                         <TextField
                             type={'text'}
@@ -162,7 +162,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                             required={true}
                         />
 
-                        <ModalFormErrorMessage message={durationErrorMessage}/>
+                        <ErrorMessage message={durationErrorMessage}/>
 
                     </div>
                     <div className={'tags-container'}>
@@ -176,7 +176,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                             autocomplete
                         />
                     </div>
-                    <ModalFormErrorMessage message={tagsErrorMessage}/>
+                    <ErrorMessage message={tagsErrorMessage}/>
                     <div className={'buttons-column'}>
                         <div className={'button'}>
                             <Button type="button"

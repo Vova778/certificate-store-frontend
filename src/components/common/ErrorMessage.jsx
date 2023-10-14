@@ -1,6 +1,7 @@
 import React from 'react';
+import '../../../src/assets/styles/common/ErrorMessage.css'
 
-const ModalFormErrorMessage = ({message}) => {
+const ErrorMessage = ({message}) => {
     return (
         <div>
             {message !== '' && <p className={'error-message'}>{message}</p>}
@@ -8,4 +9,4 @@ const ModalFormErrorMessage = ({message}) => {
     );
 };
 
-export default ModalFormErrorMessage;
+export default ErrorMessage;

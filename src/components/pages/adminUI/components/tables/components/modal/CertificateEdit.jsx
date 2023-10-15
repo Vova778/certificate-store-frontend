@@ -11,10 +11,13 @@ import {WithContext as ReactTags} from 'react-tag-input'
 import '../../../../../../../assets/styles/CertificateForm.css';
 import ErrorMessage from "../../../../../../common/ErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
+import CertificateValidator from "../../../../../../../validator/CertificateValidator";
+import Alert from "../../../../../../common/Alert";
+
 
 
 const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
-    const [isValid, setIsValid] = useState(true);
+    const [isValid, setIsValid] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [certificate, setCertificate] = useState({
         id: 0, name: '', description: '', price: 1, duration: 0, tags: []
@@ -97,9 +100,36 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
             };
     }
 
+    const validateForm = () => {
+        const errorMessages = CertificateValidator.validateCertificate(
+            certificate.name,
+            certificate.description,
+            certificate.price,
+            certificate.duration,
+            tags
+        );
+
+        setNameErrorMessage(errorMessages.nameErrorMessage);
+        setDescriptionErrorMessage(errorMessages.descriptionErrorMessage);
+        setPriceErrorMessage(errorMessages.priceErrorMessage);
+        setDurationErrorMessage(errorMessages.durationErrorMessage);
+        setTagsErrorMessage(errorMessages.tagErrorMessage);
+
+        setIsValid(
+            nameErrorMessage === '' &&
+            descriptionErrorMessage === '' &&
+            priceErrorMessage === '' &&
+            durationErrorMessage === '' &&
+            tagsErrorMessage === ''
+        );
+
+        setShowAlert(false);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         mapTagInCertificate();
+        validateForm();
         if (isValid) {
             const request = getRequestCertificate();
             CertificateService.update(request)
@@ -111,13 +141,14 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
                         setShowAlert(true);
                     }
                 });
-            window.local.reload();
+            window.location.reload();
         }
     };
 
     return (
         <Dialog  className="modal-form-container" open={setVisible} onClose={handleCloseForm}>
             <DialogTitle className="certificate-header">Edit Certificate</DialogTitle>
+            <Alert condition={showAlert} message={'Certificate with same title exist. Try change title.'}/>
             <hr/>
             <DialogContent >
                 <form method="post" onSubmit={handleSubmit}>

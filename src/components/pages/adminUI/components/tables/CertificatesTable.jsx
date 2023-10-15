@@ -57,8 +57,12 @@ const CertificatesTable = () => {
 
     useEffect(() => {
         dispatch(setPageRefresh(false));
+        const startTime = performance.now();
         CertificateService.getAllWithParams( newSearchParams )
             .then(response => {
+                const endTime = performance.now();
+                const elapsedTime = endTime - startTime;
+                console.log(`Время выполнения запроса: ${elapsedTime} миллисекунд`);
                 dispatch(adminActions.setCertificates(response.data._embedded.giftCertificateModelList));
                 dispatch(setPageQty(response.data.page.totalPages));
             })

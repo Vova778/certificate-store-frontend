@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+# Certificate Store (frontend)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+Frontend part of Gift Certificate Shop.
+ If you're interested in the backend, you can access it by clicking on the following link: [Backend](https://github.com/Vova778/external-java-lab).
 
-In the project directory, you can run:
 
-### `npm start`
+***
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## General requirements
+* Include UI in an executable jar. Running on local dev server only for development purposes.
+* Bootstrap can be used.
+* Refreshing of a page should not affect pagination.
+* Duplication of browser’s tab should lead to exactly the same page (pagination, etc.).Modals may be hidden. Local storage may be used only for security and profile info purposes. All search state should be in url.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* Styles of header and footer should be implemented according to the mockups, should be static and be stuck to the top and on the bottom of the page.
 
-### `npm test`
+* Code should be readable, easy maintainable and reusable.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Follow component-based application structure.
 
-### `npm run build`
+* Screenshots of working application should be attached to a merge request.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* In scope of this task backend may be changed a bit, but without rewriting significant amount of code
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+***
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Application requirements
 
-### `npm run eject`
+* The Latest version of React
+* EcmaScript, JSX (https://reactjs.org/docs/introducing-jsx.html)
+* Node & NPM
+* HTML5
+* The Latest version of CSS
+* Development Environment: Visual Studio Code or any
+* Routing in application: transitions between pages handled by a
+  react-router. [introducing-react-router](https://reacttraining.com/react-router/native/guides/quick-start)
+* Data storage in UI application: [redux](https://redux.js.org/)
+* Localization: en - English
+* Errors: all forms must be validated, all occurring errors such as 404 or 403 server response should be handled
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Application example
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This web-app service includes the following pages and corresponding functionality:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Home Page
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+On this Page You can view actual gift certificates and view info about specific ones details. It is possible to go to
+the next pages: SignUp, SingIn. 
 
-## Learn More
+![HomePage](src/assets/example/home-page.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Signup
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+On this Page You can fill the information about yourself required in the form and register in the application. After
+successful registration you will be redirected to the Login page. All fields of the registration form are validated so
+if any error occurs, a message will immediately be displayed to eliminate it.
 
-### Code Splitting
+![SignUp](src/assets/example/register.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Authentication
 
-### Analyzing the Bundle Size
+On this Page You can fill required account information. Once logged in You will have access to all pages that require
+authentication. This Login page also uses some cool inline validation with informing about errors and ways to eliminate
+them.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![SignIn](src/assets/example/login.png)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Gift Certificates Management (Admin)
 
-### Advanced Configuration
+On this Page You can view all actual gift certificates, get information about each of them, add new gift certificates,
+edit existing gift certificates, delete existing gift certificates, search by search term and category and viewing gift
+certificates.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+<p align="center">
+  <img src="src/assets/example/admin-certificates.png" alt="Admin Certificates">
+</p>
 
-### Deployment
+1. Search Form
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<p align="center">
+  <img src="src/assets/example/search-form.png" alt="Admin Search Certificate">
+</p>
 
-### `npm run build` fails to minify
+2. Add new Gift Certificate
+<p align="center">
+  <img src="src/assets/example/add-certificate.png" alt="Admin Add Certificate">
+</p>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. Edit Gift Certificate
+
+<p align="center">
+  <img src="src/assets/example/edit-certificate.png" alt="Admin Edit Certificate">
+</p>
+
+4. View Gift Certificate
+
+<p align="center">
+  <img src="src/assets/example/view-certificate.png" alt="Admin View Certificate">
+</p>
+
+5. Delete Gift Certificate
+
+<p align="center">
+  <img src="src/assets/example/delete-certificate.png" alt="Admin Delete Certificate">
+</p>

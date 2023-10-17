@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import '../../../../../assets/styles/include/SearchBox.css';
-import {useDispatch, useSelector} from "react-redux";
 import {WithContext as ReactTags} from "react-tag-input";
-import {useSearchParams} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {Button} from "@mui/material";
-import {setPageRefresh} from "../../../../../store/admin/AdminReducer";
 
 const SearchBox = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const refresh = () => window.location.reload();
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [isFormOpen, setIsFormOpen] = useState(false);
     const [tags, setTags] = useState([]);
@@ -35,12 +32,13 @@ const SearchBox = () => {
     };
 
     const handleSubmit = () => {
+        searchParams.set('page', '0');
         searchParams.set('name', searchedCertificateName)
         searchParams.set('description', searchedCertificateDescription)
         tags.length > 0 ? searchParams.set('tagName', tags[0].text) : searchParams.set('tagName', '');
         toggleForm();
         setSearchParams(searchParams);
-        refresh();
+        navigate(0);
     };
 
 

@@ -18,6 +18,8 @@ class AuthService {
         cookies.remove("user-token", {path: '/'});
         localStorage.removeItem("user-email");
         localStorage.removeItem("user-role");
+        localStorage.removeItem("user-first-name");
+        localStorage.removeItem("user-last-name");
     }
 }
 

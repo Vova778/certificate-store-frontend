@@ -57,7 +57,7 @@ const Login = () => {
                         maxAge: 604800,
                     });
                     localStorage.setItem('user-role', response.data.role);
-                    response.data.role === ADMIN_ROLE ? navigate('/home') : navigate('/home');
+                    response.data.role === ADMIN_ROLE ? navigate('/admin/certificates') : navigate('/home');
                 })
                 .catch(e => {
                     console.log(e.response.status)

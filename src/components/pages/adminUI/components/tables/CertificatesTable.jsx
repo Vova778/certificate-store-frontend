@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import * as adminActions from "../../../../../store/admin/AdminReducer";
 import TagList from "./components/TagList";
 import {setPageQty} from "../../../../../store/pagination/PaginationReducer";
-import {useSearchParams} from 'react-router-dom';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import CertificateView from "./components/modal/CertificateView";
 import CertificateDelete from "./components/modal/CertificateDelete";
 import CertificateAdd from "./components/modal/CertificateAdd";
@@ -30,7 +30,6 @@ const CertificatesTable = () => {
     const dispatch = useDispatch();
     const certificates = useSelector(state => state.adminData.certificates);
     const selectedCertificate = useSelector(state => state.adminData.selectedCertificate);
-    const isPageRefresh = useSelector(state => state.adminData.isPageRefresh);
 
     const [searchParams, setSearchParams] = useSearchParams();
     const searchedCertificationTitle = searchParams.get('name') || '';
@@ -42,7 +41,7 @@ const CertificatesTable = () => {
     const page = searchParams.get('page') || 0;
     const size = searchParams.get('size') || 10;
 
-    const refresh = () => window.location.reload();
+    const navigate = useNavigate();
 
     const newSearchParams = {
         tagName: searchedTagNames,
@@ -56,18 +55,13 @@ const CertificatesTable = () => {
 
 
     useEffect(() => {
-        dispatch(setPageRefresh(false));
-        const startTime = performance.now();
         CertificateService.getAllWithParams( newSearchParams )
             .then(response => {
-                const endTime = performance.now();
-                const elapsedTime = endTime - startTime;
-                console.log(`Время выполнения запроса: ${elapsedTime} миллисекунд`);
                 dispatch(adminActions.setCertificates(response.data._embedded.giftCertificateModelList));
                 dispatch(setPageQty(response.data.page.totalPages));
             })
             .catch(e => console.log(e));
-    }, [dispatch, isPageRefresh]);
+    }, [dispatch]);
 
 
     const handleSortClick = (column) => {
@@ -82,7 +76,7 @@ const CertificatesTable = () => {
     };
     const updateSearchParams = () => {
         setSearchParams(newSearchParams);
-        refresh();
+        navigate(0);
     };
 
 

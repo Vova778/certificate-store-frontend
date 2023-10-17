@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
 import {
     Dialog,
     DialogTitle,
@@ -13,11 +12,12 @@ import ErrorMessage from "../../../../../../common/ErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
 import CertificateValidator from "../../../../../../../validator/CertificateValidator";
 import Alert from "../../../../../../common/Alert";
+import {useNavigate} from "react-router-dom";
 
 
 
 const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
-    const [isValid, setIsValid] = useState(false);
+    let [isValid, setIsValid] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [certificate, setCertificate] = useState({
         id: 0, name: '', description: '', price: 1, duration: 0, tags: []
@@ -28,7 +28,7 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
     const [priceErrorMessage, setPriceErrorMessage] = useState('');
     const [durationErrorMessage, setDurationErrorMessage] = useState('');
     const [tagsErrorMessage, setTagsErrorMessage] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (certificateToUpdate) {
@@ -135,13 +135,14 @@ const CertificateEdit = ({setVisible, handleClose, certificateToUpdate}) => {
             CertificateService.update(request)
                 .then(() => {
                     handleCloseForm();
+                    navigate(0);
                 })
                 .catch(e => {
                     if (e.response.status === 400) {
                         setShowAlert(true);
                     }
                 });
-            window.location.reload();
+
         }
     };
 

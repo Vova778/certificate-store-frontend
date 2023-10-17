@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
 import {
     Dialog,
     DialogTitle,
@@ -11,12 +10,12 @@ import {WithContext as ReactTags} from 'react-tag-input'
 import '../../../../../../../assets/styles/CertificateForm.css';
 import ErrorMessage from "../../../../../../common/ErrorMessage";
 import CertificateService from "../../../../../service/CertificateService";
-import {setPageRefresh} from "../../../../../../../store/admin/AdminReducer";
 import CertificateValidator from "../../../../../../../validator/CertificateValidator";
 import Alert from "../../../../../../common/Alert";
+import {useNavigate} from "react-router-dom";
 
 const CertificateAdd = ({setVisible, handleClose}) => {
-    const [isValid, setIsValid] = useState(false);
+    let [isValid, setIsValid] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
     const [certificate, setCertificate] = useState({
         name: '', description: '', price: 1, duration: 0, tags: []
@@ -27,7 +26,7 @@ const CertificateAdd = ({setVisible, handleClose}) => {
     const [priceErrorMessage, setPriceErrorMessage] = useState('');
     const [durationErrorMessage, setDurationErrorMessage] = useState('');
     const [tagsErrorMessage, setTagsErrorMessage] = useState('');
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         setTags(tags);
@@ -131,7 +130,7 @@ const CertificateAdd = ({setVisible, handleClose}) => {
                         setShowAlert(true);
                     }
                 });
-            window.location.reload();
+            navigate(0);
         }
     };
 

@@ -1,25 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {Pagination} from "@mui/material";
 import "../../../assets/styles/include/Pagination.css"
 import PageSizeSelector from "./PageSizeSelector";
-import {useDispatch, useSelector} from "react-redux";
-import {useSearchParams} from "react-router-dom";
-import {setPageRefresh} from "../../../store/admin/AdminReducer";
-
+import {useSelector} from "react-redux";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 const PaginationComponent = () => {
     const FIRST_PAGE = 0;
     const [searchParams, setSearchParams] = useSearchParams();
-    const refresh = () => window.location.reload();
+    const navigate = useNavigate();
 
-    const [page, setPage] = useState(parseInt(searchParams.get('page')) || FIRST_PAGE);
+    const page= parseInt(searchParams.get('page')) || FIRST_PAGE;
     const pageQty = useSelector(state => state.paginationData.pageQty);
 
     const handlePageChange = (_, number) => {
         const newPage = number - 1;
         searchParams.set('page', newPage.toString());
         setSearchParams(searchParams);
-        refresh();
+        navigate(0);
     };
 
 

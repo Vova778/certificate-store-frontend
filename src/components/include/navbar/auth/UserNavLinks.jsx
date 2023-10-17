@@ -7,6 +7,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const UserNavLinks = ({handleLogout}) => {
     return (
         <div className={'nav-links'}>
+            <label className={'adminUI-name'}>{localStorage.getItem("user-first-name")} {localStorage.getItem("user-last-name") } </label>
             <Link className={'nav-link'} to={'/home'}>
                 <div className={'material-icons'}><HomeIcon/></div>
             </Link>

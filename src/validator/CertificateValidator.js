@@ -2,7 +2,7 @@ class CertificateValidator {
     static regexPatterns = {
         name: /^([A-Za-z0-9_ ]{6,30})$/,
         description: /^([A-Za-z0-9_ ]{12,1000})$/,
-        tag: /^(#[A-Za-z0-9_]{3,15})$/,
+        tag: /^([A-Za-z0-9_]{3,15})$/,
     };
 
     static errorMessages = {

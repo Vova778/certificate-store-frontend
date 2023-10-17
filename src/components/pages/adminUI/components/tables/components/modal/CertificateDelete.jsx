@@ -2,11 +2,10 @@ import React from 'react';
 import {Dialog, DialogTitle, DialogContent, DialogActions, Button,} from '@mui/material';
 import '../../../../../../../assets/styles/CertificateDelete.css';
 import CertificateService from "../../../../../service/CertificateService";
-import {useDispatch} from "react-redux";
-import {setPageRefresh} from "../../../../../../../store/admin/AdminReducer";
+import {useNavigate} from "react-router-dom";
 
 const CertificateDelete = ({setVisible, handleClose, certificate}) => {
-
+    const navigate = useNavigate();
     const handleDelete = async () => {
         try {
             await CertificateService.delete(certificate.id);
@@ -14,7 +13,7 @@ const CertificateDelete = ({setVisible, handleClose, certificate}) => {
         } catch (error) {
             handleClose();
         }
-        window.local.reload();
+        navigate(0);
     };
 
     return (
